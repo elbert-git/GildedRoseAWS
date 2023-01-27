@@ -4,7 +4,7 @@
   "description": "Gilded Rose kata in JavaScript with Jest",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
   "repository": {
