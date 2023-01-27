@@ -40,7 +40,6 @@ class Shop {
         }else if(currentItem.sellIn <= 10 && currentItem.sellIn >= 6){
           this.iterateItemQualityBy(2, currentItem);
         }else if(currentItem.sellIn <= 5 && currentItem.sellIn >= 1){
-          console.log('found below 5')
           this.iterateItemQualityBy(3, currentItem);
         }else{
           currentItem.quality = 0
@@ -50,8 +49,16 @@ class Shop {
 
         //handle sellIn
         this.decreaseSellIn(currentItem);
-      }else{
-        this.oldUpdateItem(i);
+      }
+      //handle normal item
+      else{
+        if(currentItem.sellIn > 0){
+          this.iterateItemQualityBy(-1, currentItem);
+        }else{
+          this.iterateItemQualityBy(-2, currentItem);
+        }
+        this.clampQuality(currentItem);
+        this.decreaseSellIn(currentItem);
       }
     }
     return this.items;
