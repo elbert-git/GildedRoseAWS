@@ -18,7 +18,13 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      const currentItem = this.items[i];
+      this.oldUpdateItem(i);
+    }
+    return this.items;
+  }
+   
+  oldUpdateItem(i){
+       const currentItem = this.items[i];
 
       if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (this.items[i].quality > 0) {
@@ -69,10 +75,7 @@ class Shop {
         this.items[i].sellIn = -1;
         this.items[i].quality = 80;
       }
-    }
-
-    return this.items;
-  }
+ }
 }
  
 class OldShop{
