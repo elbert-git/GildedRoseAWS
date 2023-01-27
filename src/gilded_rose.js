@@ -50,6 +50,16 @@ class Shop {
         //handle sellIn
         this.decreaseSellIn(currentItem);
       }
+      //handle conjured items
+      else if(currentItem.name.includes('Conjured')){
+        if(currentItem.sellIn > 0){
+          this.iterateItemQualityBy(-2, currentItem);
+        }else{
+          this.iterateItemQualityBy(-4, currentItem);
+        }
+        this.clampQuality(currentItem);
+        this.decreaseSellIn(currentItem);
+      }
       //handle normal item
       else{
         if(currentItem.sellIn > 0){
