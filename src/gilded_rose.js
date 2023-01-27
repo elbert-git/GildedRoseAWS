@@ -18,7 +18,14 @@ class Shop {
   }
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      this.oldUpdateItem(i);
+      const currentItem = this.items[i];
+      if(currentItem.name === 'Sulfuras, Hand of Ragnaros'){
+        //make sure sulfuras quality=80 and sellIn = -1
+        currentItem.quality = 80;
+        currentItem.sellIn = -1;
+      }else{
+        this.oldUpdateItem(i);
+      }
     }
     return this.items;
   }
