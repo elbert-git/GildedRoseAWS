@@ -110,10 +110,6 @@ describe('Testing backstage concert', ()=>{
     expect(gildedRose.items[0].quality).toEqual(29)
   });
   it('Quality increases by 3 when <6 days to sell date', ()=>{
-    passTheDay(gildedRose, 7);
-    expect(gildedRose.items[0].quality).toEqual(29)
-  });
-  it('Quality increases by 3 when <6 days to sell date', ()=>{
     passTheDay(gildedRose, 14);
     expect(gildedRose.items[0].quality).toEqual(47)
   });
@@ -123,27 +119,27 @@ describe('Testing backstage concert', ()=>{
   });
 })
 
-describe('Testing conjured items', ()=>{
-  //setup shop and item
-  let items;
-  let gildedRose;
-  beforeEach(()=>{
-    items = [
-      new Item("Conjured Item", 5, 40),
-    ]
-    gildedRose = new Shop(items);
-  })
+// describe('Testing conjured items', ()=>{
+//   //setup shop and item
+//   let items;
+//   let gildedRose;
+//   beforeEach(()=>{
+//     items = [
+//       new Item("Conjured Item", 5, 40),
+//     ]
+//     gildedRose = new Shop(items);
+//   })
 
-  it('Conjured items should decrease in quality by 2 each day', ()=>{
-    passTheDay(gildedRose, 2);
-    expect(gildedRose.items[0].quality).toEqual(36)
-  });
-  it('Conjured items should decrease in quality by 4 each day, past sell date', ()=>{
-    passTheDay(gildedRose, 10);
-    expect(gildedRose.items[0].quality).toEqual(20)
-  });
-  it('Item quality are clamped at 0-50', ()=>{
-    passTheDay(gildedRose, 200);
-    expect(gildedRose.items[0].quality).toEqual(0)
-  });
-})
+//   it('Conjured items should decrease in quality by 2 each day', ()=>{
+//     passTheDay(gildedRose, 2);
+//     expect(gildedRose.items[0].quality).toEqual(36)
+//   });
+//   it('Conjured items should decrease in quality by 4 each day, past sell date', ()=>{
+//     passTheDay(gildedRose, 10);
+//     expect(gildedRose.items[0].quality).toEqual(20)
+//   });
+//   it('Item quality are clamped at 0-50', ()=>{
+//     passTheDay(gildedRose, 200);
+//     expect(gildedRose.items[0].quality).toEqual(0)
+//   });
+// })

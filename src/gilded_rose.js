@@ -19,15 +19,37 @@ class Shop {
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       const currentItem = this.items[i];
+
+      //process itesm
       if(currentItem.name === 'Sulfuras, Hand of Ragnaros'){
         //make sure sulfuras quality=80 and sellIn = -1
         currentItem.quality = 80;
         currentItem.sellIn = -1;
-      }else if(currentItem.name === 'Aged Brie'){
-        // iterate quality
-        currentItem.quality += 1;
-        this.decreaseSellIn(currentItem);
+      }
+      //handle aged brie
+      else if(currentItem.name === 'Aged Brie'){
+        this.iterateItemQualityBy(1, currentItem);
         this.clampQuality(currentItem)
+        this.decreaseSellIn(currentItem);
+      }
+      //handle backstage passes
+      else if(currentItem.name.includes('Backstage')){
+        //handle quality
+        if(currentItem.sellIn >= 11){
+          this.iterateItemQualityBy(1, currentItem);
+        }else if(currentItem.sellIn <= 10 && currentItem.sellIn >= 6){
+          this.iterateItemQualityBy(2, currentItem);
+        }else if(currentItem.sellIn <= 5 && currentItem.sellIn >= 1){
+          console.log('found below 5')
+          this.iterateItemQualityBy(3, currentItem);
+        }else{
+          currentItem.quality = 0
+        }
+
+        this.clampQuality(currentItem);
+
+        //handle sellIn
+        this.decreaseSellIn(currentItem);
       }else{
         this.oldUpdateItem(i);
       }
@@ -42,6 +64,10 @@ class Shop {
     if(item.quality < 0){
       item.quality = 0
     }
+  }
+   
+  iterateItemQualityBy(num, item){
+    item.quality += num
   }
 
   decreaseSellIn(item){
