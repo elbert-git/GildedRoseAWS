@@ -14,30 +14,29 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       const currentItem = this.items[i]
 
-
       // handle items that increase in quality
-      if(currentItem.name === 'Aged Brie' || currentItem.name === 'Backstage passes to a TAFKAL80ETC concert'){
-          currentItem.quality = currentItem.quality + 1;
-        if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
-          if (currentItem.sellIn < 11) {
-              currentItem.quality = currentItem.quality + 1;
-          }
-          if (currentItem.sellIn < 6) {
-              currentItem.quality = currentItem.quality + 1;
-          }
+      if(currentItem.name === 'Aged Brie'){
+        currentItem.quality = currentItem.quality + 1;
+      }
+
+      //handle backstage pass quality
+      else if (currentItem.name.includes('Backstage')) {
+        currentItem.quality = currentItem.quality + 1;
+        if (currentItem.sellIn < 11) {
+            currentItem.quality = currentItem.quality + 1;
         }
-     }
-     //normal item
-     else{
-          if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
-            currentItem.quality = currentItem.quality - 1;
-          }
-     }
+        if (currentItem.sellIn < 6) {
+            currentItem.quality = currentItem.quality + 1;
+        }
+      }
+      
+      //handle normal item quality
+      else{
+          currentItem.quality = currentItem.quality - 1;
+      }
 
      // handle item sell in date
-      if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
-        currentItem.sellIn = currentItem.sellIn - 1;
-      }
+      currentItem.sellIn = currentItem.sellIn - 1;
 
       // handle items past sell in date
       if (currentItem.sellIn < 0) {
