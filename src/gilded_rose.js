@@ -16,27 +16,19 @@ class Shop {
 
 
       if (currentItem.name != 'Aged Brie' && currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
-        if (currentItem.quality > 0) {
           if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
             currentItem.quality = currentItem.quality - 1;
           }
-        }
       } else {
-        if (currentItem.quality < 50) {
           currentItem.quality = currentItem.quality + 1;
           if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
             if (currentItem.sellIn < 11) {
-              if (currentItem.quality < 50) {
                 currentItem.quality = currentItem.quality + 1;
-              }
             }
             if (currentItem.sellIn < 6) {
-              if (currentItem.quality < 50) {
                 currentItem.quality = currentItem.quality + 1;
-              }
             }
           }
-        }
       }
       if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
         currentItem.sellIn = currentItem.sellIn - 1;
@@ -44,20 +36,21 @@ class Shop {
       if (currentItem.sellIn < 0) {
         if (currentItem.name != 'Aged Brie') {
           if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (currentItem.quality > 0) {
               if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
                 currentItem.quality = currentItem.quality - 1;
               }
-            }
           } else {
             currentItem.quality = currentItem.quality - currentItem.quality;
           }
         } else {
-          if (currentItem.quality < 50) {
             currentItem.quality = currentItem.quality + 1;
-          }
         }
       }
+       
+      // * ----refactor below
+
+      //clamp item quality
+      this.clampQuality(currentItem)
 
       // handle sulfuras
       if(currentItem.name === 'Sulfuras, Hand of Ragnaros'){
@@ -67,6 +60,15 @@ class Shop {
     }
 
     return this.items;
+  }
+   
+  clampQuality(item){
+    if(item.quality > 50){
+      item.quality = 50
+    }
+    if(item.quality < 0){
+      item.quality = 0
+    }
   }
 }
 
