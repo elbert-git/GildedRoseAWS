@@ -16,23 +16,23 @@ class Shop {
 
       // handle items that increase in quality
       if(currentItem.name === 'Aged Brie'){
-        currentItem.quality = currentItem.quality + 1;
+        this.iterateItemQualityBy(1, currentItem);
       }
 
       //handle backstage pass quality
       else if (currentItem.name.includes('Backstage')) {
-        currentItem.quality = currentItem.quality + 1;
+        this.iterateItemQualityBy(1, currentItem);
         if (currentItem.sellIn < 11) {
-            currentItem.quality = currentItem.quality + 1;
+          this.iterateItemQualityBy(1, currentItem);
         }
         if (currentItem.sellIn < 6) {
-            currentItem.quality = currentItem.quality + 1;
+          this.iterateItemQualityBy(1, currentItem);
         }
       }
       
       //handle normal item quality
       else{
-          currentItem.quality = currentItem.quality - 1;
+        this.iterateItemQualityBy(-1, currentItem);
       }
 
      // handle item sell in date
@@ -67,7 +67,11 @@ class Shop {
 
     return this.items;
   }
-   
+  
+  iterateItemQualityBy(num, item){
+    item.quality += num;
+  }
+
   clampQuality(item){
     if(item.quality > 50){
       item.quality = 50
