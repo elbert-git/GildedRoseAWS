@@ -140,7 +140,7 @@ describe('Testing conjured items', ()=>{
   });
   it('Conjured items should decrease in quality by 4 each day, past sell date', ()=>{
     passTheDay(gildedRose, 10);
-    expect(gildedRose.items[0].quality).toEqual(20)
+    expect(gildedRose.items[0].quality).toEqual(10)
   });
   it('Item quality are clamped at 0-50', ()=>{
     passTheDay(gildedRose, 200);

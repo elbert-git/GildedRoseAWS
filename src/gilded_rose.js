@@ -44,6 +44,19 @@ class Shop {
         currentItem.quality = 80;
         currentItem.sellIn = -1;
       }
+       
+      //handle conjured items
+      else if(currentItem.name.includes("Conjured")){
+        if(currentItem.sellIn > 0){
+          this.iterateItemQualityBy(-2, currentItem);
+        }else{
+          this.iterateItemQualityBy(-4, currentItem);
+        }
+
+        this.clampQuality(currentItem)
+        this.decreaeItemSellIn(currentItem)
+
+      }
       
       //handle normal item quality
       else{
