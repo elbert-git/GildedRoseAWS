@@ -15,24 +15,31 @@ class Shop {
       const currentItem = this.items[i]
 
 
-      if (currentItem.name != 'Aged Brie' && currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
+      // handle items that increase in quality
+      if(currentItem.name === 'Aged Brie' || currentItem.name === 'Backstage passes to a TAFKAL80ETC concert'){
+          currentItem.quality = currentItem.quality + 1;
+        if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
+          if (currentItem.sellIn < 11) {
+              currentItem.quality = currentItem.quality + 1;
+          }
+          if (currentItem.sellIn < 6) {
+              currentItem.quality = currentItem.quality + 1;
+          }
+        }
+     }
+     //normal item
+     else{
           if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
             currentItem.quality = currentItem.quality - 1;
           }
-      } else {
-          currentItem.quality = currentItem.quality + 1;
-          if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (currentItem.sellIn < 11) {
-                currentItem.quality = currentItem.quality + 1;
-            }
-            if (currentItem.sellIn < 6) {
-                currentItem.quality = currentItem.quality + 1;
-            }
-          }
-      }
+     }
+
+     // handle item sell in date
       if (currentItem.name != 'Sulfuras, Hand of Ragnaros') {
         currentItem.sellIn = currentItem.sellIn - 1;
       }
+
+      // handle items past sell in date
       if (currentItem.sellIn < 0) {
         if (currentItem.name != 'Aged Brie') {
           if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
@@ -52,7 +59,7 @@ class Shop {
       //clamp item quality
       this.clampQuality(currentItem)
 
-      // handle sulfuras
+      // enforce sulfuras constant values
       if(currentItem.name === 'Sulfuras, Hand of Ragnaros'){
         currentItem.quality = 80;
         currentItem.sellIn = -1;
